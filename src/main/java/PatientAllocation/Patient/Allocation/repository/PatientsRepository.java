@@ -1,11 +1,11 @@
-package PatientAllocation.Patient.Allocation.repository;
+package patientallocation.patient.allocation.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import PatientAllocation.Patient.Allocation.entity.Patients;
+import patientallocation.patient.allocation.entity.Patient;
 
 @Repository
-public interface PatientsRepository extends JpaRepository<Patients, Long> {
+public interface PatientsRepository extends JpaRepository<Patient, Long> {
 
 }

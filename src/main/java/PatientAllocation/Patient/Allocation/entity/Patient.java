@@ -1,6 +1,14 @@
-package PatientAllocation.Patient.Allocation.pojo;
+package patientallocation.patient.allocation.entity;
 
-public class Patients {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class Patient {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String name;
 	private String city;
@@ -56,7 +64,7 @@ public class Patients {
 		this.symptom = symptom;
 	}
 
-	public Patients(long id, String name, String city, String email, String phoneNumber, String symptom) {
+	public Patient(long id, String name, String city, String email, String phoneNumber, String symptom) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -66,14 +74,8 @@ public class Patients {
 		this.symptom = symptom;
 	}
 
-	public Patients() {
+	public Patient() {
 
-	}
-
-	@Override
-	public String toString() {
-		return "Patients [id=" + id + ", name=" + name + ", city=" + city + ", email=" + email + ", phoneNumber="
-				+ phoneNumber + ", symptom=" + symptom + "]";
 	}
 
 }

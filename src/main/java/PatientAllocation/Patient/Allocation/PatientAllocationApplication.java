@@ -1,4 +1,4 @@
-package PatientAllocation.Patient.Allocation;
+package patientallocation.patient.allocation;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

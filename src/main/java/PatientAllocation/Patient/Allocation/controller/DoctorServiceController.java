@@ -1,4 +1,4 @@
-package PatientAllocation.Patient.Allocation.controller;
+package patientallocation.patient.allocation.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,18 +10,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import PatientAllocation.Patient.Allocation.entity.Doctors;
-import PatientAllocation.Patient.Allocation.service.DoctorsService;
+import patientallocation.patient.allocation.entity.Doctor;
+import patientallocation.patient.allocation.service.DoctorServiceImpl;
 
 @RestController
 @RequestMapping("/doctor")
 public class DoctorServiceController {
 
 	@Autowired
-	private DoctorsService doctorsService;
+	private DoctorServiceImpl doctorsService;
 
 	@PostMapping("")
-	public ResponseEntity<String> addDoctor(@RequestBody Doctors doctor) {
+	public ResponseEntity<String> addDoctor(@RequestBody Doctor doctor) {
 		String newDoctor = doctorsService.addDoctor(doctor);
 		return new ResponseEntity<>(newDoctor, HttpStatus.CREATED);
 	}

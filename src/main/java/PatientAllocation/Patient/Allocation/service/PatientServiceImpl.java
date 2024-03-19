@@ -1,18 +1,18 @@
-package PatientAllocation.Patient.Allocation.service;
+package patientallocation.patient.allocation.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import PatientAllocation.Patient.Allocation.entity.Patients;
-import PatientAllocation.Patient.Allocation.repository.PatientsRepository;
+import patientallocation.patient.allocation.entity.Patient;
+import patientallocation.patient.allocation.repository.PatientsRepository;
 
 @Service
-public class PatientsService {
+public class PatientServiceImpl {
 
 	@Autowired
 	private PatientsRepository patientsRepository;
 
-	public String addPatient(Patients patient) {
+	public String addPatient(Patient patient) {
 		 if (isValidPatient(patient)) {
 		patientsRepository.save(patient);
 		return "Patient added successfully";
@@ -29,7 +29,7 @@ public class PatientsService {
 		return false;
 	}
 
-	private boolean isValidPatient(Patients patient) {
+	private boolean isValidPatient(Patient patient) {
 		return patient.getName().length() >= 3 && patient.getCity().length() <= 20 && isValidEmail(patient.getEmail())
 				&& patient.getPhoneNumber().length() >= 10;
 	}

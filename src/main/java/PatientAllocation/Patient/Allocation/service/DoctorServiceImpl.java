@@ -1,4 +1,4 @@
-package PatientAllocation.Patient.Allocation.service;
+package patientallocation.patient.allocation.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,13 +6,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import PatientAllocation.Patient.Allocation.entity.Doctors;
-import PatientAllocation.Patient.Allocation.entity.Patients;
-import PatientAllocation.Patient.Allocation.repository.DoctorsRepository;
-import PatientAllocation.Patient.Allocation.repository.PatientsRepository;
+import patientallocation.patient.allocation.entity.Doctor;
+import patientallocation.patient.allocation.entity.Patient;
+import patientallocation.patient.allocation.repository.DoctorsRepository;
+import patientallocation.patient.allocation.repository.PatientsRepository;
 
 @Service
-public class DoctorsService {
+public class DoctorServiceImpl {
 
 	@Autowired
 	private DoctorsRepository doctorsRepository;
@@ -20,7 +20,7 @@ public class DoctorsService {
 	@Autowired
 	private PatientsRepository patientsRepository;
 
-	public String addDoctor(Doctors doctor) {
+	public String addDoctor(Doctor doctor) {
 		if (isValidDoctor(doctor)) {
 			doctorsRepository.save(doctor);
 			return "Doctor added successfully";
@@ -38,14 +38,14 @@ public class DoctorsService {
 	}
 
 	@SuppressWarnings("unused")
-	public List<Doctors> getSuggestedDoctors(Long patientId) {
+	public List<Doctor> getSuggestedDoctors(Long patientId) {
 
-		Patients patient = patientsRepository.findById(patientId).orElse(null);
+		Patient patient = patientsRepository.findById(patientId).orElse(null);
 		String city = patient.getCity();
 		String symptom = patient.getSymptom();
 		String speciality = getSpeciality(symptom);
-		List<Doctors> doctorsInCity = doctorsRepository.findByCity(city);
-		List<Doctors> suggestedDoctors = doctorsRepository.findByCityAndSpeciality(city, speciality);
+		List<Doctor> doctorsInCity = doctorsRepository.findByCity(city);
+		List<Doctor> suggestedDoctors = doctorsRepository.findByCityAndSpeciality(city, speciality);
 
 		if (patient == null) {
 			throw new IllegalArgumentException("Patient not found with the provided ID");
@@ -85,7 +85,7 @@ public class DoctorsService {
 		}
 	}
 
-	private boolean isValidDoctor(Doctors doctor) {
+	private boolean isValidDoctor(Doctor doctor) {
 		return doctor.getName().length() >= 3 && isValidCity(doctor.getCity()) && doctor.getCity().length() <= 20
 				&& isValidEmail(doctor.getEmail()) && doctor.getPhoneNumber().length() >= 10;
 	}
@@ -98,9 +98,9 @@ public class DoctorsService {
 		return city != null && (city.equals("Delhi") || city.equals("Noida") || city.equals("Faridabad"));
 	}
 
-	private List<Doctors> createListWithMessage(String message) {
-		List<Doctors> list = new ArrayList<>();
-		Doctors dummyDoctor = new Doctors();
+	private List<Doctor> createListWithMessage(String message) {
+		List<Doctor> list = new ArrayList<>();
+		Doctor dummyDoctor = new Doctor();
 		dummyDoctor.setName(message);
 		list.add(dummyDoctor);
 		return list;

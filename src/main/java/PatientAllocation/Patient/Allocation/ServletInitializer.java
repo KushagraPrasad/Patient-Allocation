@@ -1,4 +1,4 @@
-package PatientAllocation.Patient.Allocation;
+package patientallocation.patient.allocation;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

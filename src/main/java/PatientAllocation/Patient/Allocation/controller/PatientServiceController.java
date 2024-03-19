@@ -1,4 +1,4 @@
-package PatientAllocation.Patient.Allocation.controller;
+package patientallocation.patient.allocation.controller;
 
 import java.util.List;
 
@@ -13,23 +13,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import PatientAllocation.Patient.Allocation.entity.Doctors;
-import PatientAllocation.Patient.Allocation.entity.Patients;
-import PatientAllocation.Patient.Allocation.service.DoctorsService;
-import PatientAllocation.Patient.Allocation.service.PatientsService;
+import patientallocation.patient.allocation.entity.Doctor;
+import patientallocation.patient.allocation.entity.Patient;
+import patientallocation.patient.allocation.service.DoctorServiceImpl;
+import patientallocation.patient.allocation.service.PatientServiceImpl;
 
 @RestController
 @RequestMapping("/patient")
 public class PatientServiceController {
 
 	@Autowired
-	private DoctorsService doctorsService;
+	private DoctorServiceImpl doctorsService;
 
 	@Autowired
-	private PatientsService patientsService;
+	private PatientServiceImpl patientsService;
 
 	@PostMapping(value = "")
-	public ResponseEntity<String> addPatient(@RequestBody Patients patient) {
+	public ResponseEntity<String> addPatient(@RequestBody Patient patient) {
 		String newPatient = patientsService.addPatient(patient);
 		return new ResponseEntity<>(newPatient, HttpStatus.CREATED);
 	}
@@ -43,8 +43,8 @@ public class PatientServiceController {
 	}
 
 	@GetMapping("/suggestion/{patientId}")
-	public ResponseEntity<List<Doctors>> suggestDoctors(@PathVariable Long patientId) {
-		List<Doctors> suggestedDoctors = doctorsService.getSuggestedDoctors(patientId);
+	public ResponseEntity<List<Doctor>> suggestDoctors(@PathVariable Long patientId) {
+		List<Doctor> suggestedDoctors = doctorsService.getSuggestedDoctors(patientId);
 		if (suggestedDoctors.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
